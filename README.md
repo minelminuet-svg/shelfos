@@ -1,6 +1,21 @@
 # ShelfOS - Retail Operations Automation Platform
 
-A complete, functional retail automation system for small-to-mid retail businesses. Includes inventory management, purchase orders, low-stock alerts, and operational dashboards.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-green.svg)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue.svg)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg)](https://www.postgresql.org/)
+
+A complete, production-ready retail automation system for small-to-mid retail businesses. Includes inventory management, purchase order management, real-time low-stock alerts, and operational dashboards with professional UI/UX.
+
+## 📋 Project Overview
+
+ShelfOS is a **full-stack monorepo project** that demonstrates:
+- Enterprise-grade backend API with NestJS
+- Modern frontend with Next.js and React
+- Multi-tenant architecture for scalability
+- Professional UI with Tailwind CSS and glassmorphism
+- Docker containerization for infrastructure
+- Complete data persistence with PostgreSQL and Prisma ORM
 
 ## 🎯 Features Implemented
 
@@ -17,72 +32,228 @@ A complete, functional retail automation system for small-to-mid retail business
 - **API Endpoints**: Complete REST API for all core features
 - **Database**: PostgreSQL with Prisma ORM and seeds
 
-### Pages Available
-1. **Home** (`/`) - Welcome page with navigation
-2. **Dashboard** (`/dashboard`) - Key metrics and recent movements
-3. **Inventory** (`/inventory`) - Current stock levels with status
-4. **Products** (`/products`) - Complete product catalog
-5. **Purchase Orders** (`/purchase-orders`) - PO management and tracking
-6. **Alerts** (`/alerts`) - Low-stock and operational alerts
+## 🏗️ Project Structure
 
-### API Endpoints
-- `GET/POST /api/products` - Product management
-- `GET/POST /api/suppliers` - Supplier management
-- `GET/POST /api/purchase-orders` - Purchase order operations
-- `GET/POST /api/inventory/movements` - Stock movement tracking
-- `GET /api/inventory/balances` - Current inventory balances
-- `GET /api/alerts` - Alert retrieval and management
-- `GET /api/dashboard/*` - Dashboard metrics and data
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Docker Desktop (for PostgreSQL and Redis)
-- Node.js 20+
-- PNPM
-
-### Installation & Setup
-
-```bash
-# 1. Install dependencies (already done)
-pnpm install
-
-# 2. Start Docker services
-docker compose up -d postgres redis
-
-# 3. Environment is configured
-
-# 4. Initialize database
-pnpm db:generate  # Generate Prisma client
-pnpm db:migrate   # Run migrations
-pnpm db:seed      # Seed demo data
-
-# 5. Start development servers
-pnpm dev:api      # Terminal 1
-pnpm dev:web      # Terminal 2
+```
+joc_snake/
+├── apps/
+│   ├── api/                    # NestJS backend server
+│   │   ├── src/
+│   │   │   ├── controllers/    # API route handlers (6 files)
+│   │   │   ├── services/       # Business logic layer
+│   │   │   ├── middleware/     # Multi-tenancy, guards
+│   │   │   └── main.ts         # Express bootstrapper
+│   │   └── package.json
+│   │
+│   └── web/                    # Next.js frontend application
+│       ├── src/
+│       │   ├── pages/          # 6 React pages with data integration
+│       │   ├── components/     # Shared UI components (AppShell, states.tsx)
+│       │   └── lib/            # API utilities, helpers
+│       └── package.json
+│
+├── packages/
+│   ├── config/                 # Shared TypeScript & ESLint configs
+│   ├── db/                     # Prisma ORM with schema
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma   # 13 database entities
+│   │   │   └── migrations/     # Database version control
+│   │   └── seed.ts             # Idempotent demo data
+│   └── types/                  # Shared TypeScript interfaces
+│
+├── docs/                        # Documentation
+├── docker-compose.yml           # PostgreSQL + Redis services
+├── pnpm-workspace.yaml          # Monorepo configuration
+└── package.json                 # Root workspace manifest
 ```
 
-### Access the Application
+## 💻 Tech Stack
 
-- **Frontend**: http://localhost:3000
-- **API**: http://localhost:3001/api
-- **Database**: `postgresql://postgres:postgres@localhost:5432/shelfos`
+### Frontend
+- **Next.js** 14 - React framework with file-based routing
+- **React** 18 - UI library with hooks
+- **TypeScript** 5 - Type-safe JavaScript
+- **Tailwind CSS** 3 - Utility-first CSS framework
+- **Axios** - HTTP client for API calls
+
+### Backend
+- **NestJS** 10 - Progressive Node.js framework
+- **Express** 4 - Underlying HTTP server
+- **TypeScript** 5 - Full type safety
+- **Prisma** 5.7 - Type-safe ORM
+
+### Database & Cache
+- **PostgreSQL** 16 - Relational database
+- **Redis** 7 - In-memory cache/queue
+- **Prisma Client** - Query builder & migration tool
+
+### Infrastructure
+- **Docker** - Containerization
+- **Docker Compose** - Multi-container orchestration
+- **PNPM** - Fast, disk-efficient package manager
+
+## 🎨 UI/UX Features
+
+- **Dark Theme** - Professional slate and emerald color scheme
+- **Glassmorphism** - Backdrop blur effects for depth
+- **Responsive Design** - Mobile-friendly layouts
+- **Hover Effects** - Interactive feedback with scale and shadow
+- **Color-Coded Status** - Visual indicators (success/warning/danger)
+- **Professional Typography** - Consistent font hierarchy
+- **Icon Indicators** - Emoji-based quick recognition
+
+## 📦 Database Schema
+
+13 entities with full relationships:
+- **Organizations** - Multi-tenancy root
+- **Products** - Catalog with pricing
+- **Suppliers** - Vendor management
+- **InventoryBalances** - Current stock tracking
+- **InventoryMovements** - Immutable transaction log
+- **PurchaseOrders** - Purchase workflow
+- **PurchaseOrderLineItems** - Order details
+- **Locations** - Physical storage locations
+- **Alerts** - System notifications
+- **AutomationRules** - Business logic triggers
+- **AuditLogs** - Change tracking
+- **StockMovementTypes** - Transaction classification
+- **Organizations** - Tenant isolation
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Docker Desktop** (PostgreSQL 16 & Redis 7)
+- **Node.js** 20+ ([download](https://nodejs.org/))
+- **PNPM** 9+ (`npm install -g pnpm`)
+
+### Step 1: Clone & Install
+
+```bash
+git clone https://github.com/minelminuet-svg/shelfos.git
+cd shelfos
+pnpm install
+```
+
+### Step 2: Start Infrastructure
+
+```bash
+docker compose up -d
+```
+
+This starts:
+- PostgreSQL on port 5432
+- Redis on port 6379
+
+### Step 3: Database Setup
+
+```bash
+pnpm db:generate  # Generate Prisma client
+pnpm db:migrate   # Run migrations
+pnpm db:seed      # Load demo data
+```
+
+### Step 4: Start Development Servers
+
+**Terminal 1 - Backend API:**
+```bash
+cd apps/api
+pnpm start
+```
+Runs on `http://localhost:3001`
+
+**Terminal 2 - Frontend:**
+```bash
+cd apps/web
+pnpm dev
+```
+Runs on `http://localhost:3000`
+
+### Verify Installation
+
+1. **Frontend**: Open http://localhost:3000 in browser
+2. **API**: Test http://localhost:3001/api/dashboard/summary
+3. **Database**: PostgreSQL should be accessible on port 5432
 
 ## 📊 Demo Data
 
-The database is pre-seeded with realistic demo data:
+Pre-seeded data includes:
 
 ### Organization
 - **Name**: Demo Retail Store
-- **Slug**: demo-store
+- **ID**: demo-store
 
 ### Products (2)
 1. **Blue Widget** (SKU: WIDGET-001)
    - Price: $29.99
-   - Reorder Point: 10 units
-   - Stock: 20 backroom + 15 floor = 35 total
+   - Stock: 35 units
+   
+2. **Red Gadget** (SKU: GADGET-001)
+   - Price: $49.99
+   - Stock: 3 units (⚠️ below reorder point of 10)
 
-2. **Red Gadget** (SKU: GADGET-001) ⚠️ LOW STOCK
+### Alerts
+- Low-stock warning for Red Gadget
+- Triggered automatically when inventory < reorder point
+
+## 🔌 API Endpoints
+
+All endpoints are scoped to `demo-store` organization:
+
+### Dashboard
+- `GET /api/dashboard/summary` - Key metrics
+- `GET /api/dashboard/recent-movements` - Latest 10 stock movements
+
+### Products
+- `GET /api/products` - All products
+- `POST /api/products` - Create product
+
+### Inventory
+- `GET /api/inventory/balances` - Current stock by location
+- `POST /api/inventory/movements` - Record stock movement
+
+### Purchase Orders
+- `GET /api/purchase-orders` - All orders
+- `POST /api/purchase-orders` - Create order
+
+### Suppliers
+- `GET /api/suppliers` - All suppliers
+- `POST /api/suppliers` - Create supplier
+
+### Alerts
+- `GET /api/alerts` - All alerts
+- `PUT /api/alerts/:id/status` - Update alert status
+
+## 🖥️ Frontend Pages
+
+1. **Home** (`/`)
+   - Welcome screen
+   - Feature cards linking to main sections
+   - Professional branding
+
+2. **Dashboard** (`/dashboard`)
+   - 4 metric cards with icons and status
+   - Recent stock movements table
+   - Real-time data from API
+
+3. **Inventory** (`/inventory`)
+   - Stock levels by location
+   - Color-coded status (healthy/low)
+   - Reorder point indicators
+
+4. **Products** (`/products`)
+   - Product grid layout
+   - Price, SKU, and reorder info
+   - Hover effects
+
+5. **Purchase Orders** (`/purchase-orders`)
+   - Order list with supplier info
+   - Status tracking (draft/sent/received)
+   - Line item counts and totals
+
+6. **Alerts** (`/alerts`)
+   - All system alerts
+   - Severity-based styling (critical/warning/info)
+   - Created timestamp
    - Price: $49.99
    - Reorder Point: 5 units
    - Stock: 3 units (below reorder point)
