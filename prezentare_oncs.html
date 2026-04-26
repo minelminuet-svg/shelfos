@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistem de Rachetă Reutilizabil — ONCS 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <style>
   :root {
     --space-black: #020408;
@@ -535,16 +547,18 @@
     border-radius: 20px;
   }
   .formula-text {
-    font-family: 'Orbitron', monospace;
     font-size: clamp(24px, 4vw, 48px);
     font-weight: 900;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold), var(--accent-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 2px;
+    color: var(--text-white);
     position: relative;
     z-index: 1;
+  }
+  .formula-text mjx-container {
+    margin: 0 !important;
+    color: var(--text-white);
+  }
+  .formula-text mjx-container svg {
+    filter: drop-shadow(0 0 18px rgba(94,234,212,0.2));
   }
   .formula-terms {
     display: flex;
@@ -562,11 +576,15 @@
     min-width: 140px;
   }
   .term-symbol {
-    font-family: 'Orbitron', monospace;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--accent-gold);
     margin-bottom: 6px;
+    min-height: 30px;
+  }
+  .term-symbol mjx-container {
+    margin: 0 !important;
+    color: var(--accent-gold);
   }
   .term-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
   .formula-conclusion {
@@ -1421,23 +1439,23 @@
       <div class="slide-divider" style="margin:10px auto 0;"></div>
     </div>
     <div class="formula-box fade-in">
-      <div class="formula-text">Δv = Isp × g₀ × ln(m₀ / mf)</div>
+      <div class="formula-text">\[\Delta v = I_{sp} \cdot g_0 \cdot \ln\left(\frac{m_0}{m_f}\right)\]</div>
     </div>
     <div class="formula-terms fade-in">
       <div class="term-box">
-        <div class="term-symbol">Δv</div>
+        <div class="term-symbol">\( \Delta v \)</div>
         <div class="term-desc">Bugetul de viteză al misiunii — suma tuturor accelerărilor necesare</div>
       </div>
       <div class="term-box">
-        <div class="term-symbol">Isp</div>
+        <div class="term-symbol">\( I_{sp} \)</div>
         <div class="term-desc">Impulsul specific — eficiența motorului în secunde</div>
       </div>
       <div class="term-box">
-        <div class="term-symbol">g₀</div>
+        <div class="term-symbol">\( g_0 \)</div>
         <div class="term-desc">Accelerația gravitațională = 9,81 m/s²</div>
       </div>
       <div class="term-box">
-        <div class="term-symbol">ln(m₀/mf)</div>
+        <div class="term-symbol">\( \ln\left(\frac{m_0}{m_f}\right) \)</div>
         <div class="term-desc">Logaritm natural al raportului de masă — relație exponențială</div>
       </div>
     </div>
